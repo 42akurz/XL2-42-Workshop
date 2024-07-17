@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XL2 Workshop</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>XL2 Workshop</h1>
+    <label for="api-url">API URL:</label>
+    <input type="text" id="api-url" placeholder="Enter API URL" />
+
+    <label for="request-body">Request Body:</label>
+    <textarea
+      id="request-body"
+      rows="4"
+      placeholder="Enter request body (JSON format)"
+    ></textarea>
+
+    <button onclick="makeRequest()">Make Request</button>
+
+    <div id="response"></div>
+
+    <script>
+      async function makeRequest() {
+        const url = document.getElementById("api-url").value;
+        const body = document.getElementById("request-body").value;
+        const responseDiv = document.getElementById("response");
+
+        try {
+          const response = await fetch(url, {
+            method: "GET",
+          });
+          const data = await response.text();
+          responseDiv.innerHTML = `<pre>${data}</pre>`;
+        } catch (error) {
+          responseDiv.innerHTML = `<pre>Error: ${error.message}</pre>`;
+        }
+      }
+    </script>
+  </body>
+</html>
